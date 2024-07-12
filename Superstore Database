@@ -64,3 +64,19 @@ order by stock_quantity;
 Select Item_name, stock_quantity
 From superstore
 Where item_name='Air Purifier';
+
+#Show the total count of items in Kitchen Supplies
+SELECT COUNT(item_name), category
+FROM superstore
+WHERE category = 'Kitchen Supplies';
+
+#Show the average cost of Kitchen Supplies
+SELECT AVG(price), category
+FROM superstore
+WHERE category= 'Kitchen supplies';
+
+#Display the most expensive item in Appliances
+SELECT price, item_name, category
+FROM superstore
+WHERE Category = 'Appliances' 
+ORDER BY price DESC;
