@@ -56,44 +56,60 @@ VALUES
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
-SELECT * 
-FROM fortune_companies;
+-- Analysis:
 
---#1. Number of companies categorized by industry
+--#1. Count the number of companies in each industry
 SELECT industry, COUNT(*) as company_count
 FROM fortune_companies
 GROUP BY industry;
 
---#2. Rank the companies from the highest to the lowest number of maternity leave weeks offered 
+--#2. Rank companies by the number of maternity leave weeks offered, from highest to lowest
 SELECT company_name, maternity_leave_weeks
 FROM fortune_companies
 ORDER BY maternity_leave_weeks desc;
 
---#3. Order companies by highest to lowest number of employees
+--#3. Order companies by the number of employees, from highest to lowest
 SELECT company_name, employees
 FROM fortune_companies
 ORDER by employees desc;
 
---4. Display the average employee tenure years based on industry
+--4. Calculate the average employee tenure for each industry, rounded to one decimal place and order the results from highest to lowest
 SELECT industry, ROUND(AVG(avg_employee_tenure),1) AS avg_tenure
 FROM fortune_companies
 GROUP BY industry
 ORDER BY avg_tenure desc;
 
---5. Rank the companies from highest to lowest revenue
-SELECt company_name, industry, revenue, employees
+--5. Rank the companies by revenue, from highest to lowest
+SELECT company_name, industry, revenue, employees
 FROM fortune_companies
 ORDER by revenue desc;
 
--- 6. Categorize companies by the number of paid time off days provided
+-- 6. Categorize companies by the number of paid time off (PTO) days provided
 SELECT company_name, industry,
 CASE WHEN paid_time_off_days >=20 then 'high_pto'
 WHEN paid_time_off_days >=14 then 'moderate_pto'
 ELSE 'Low PTO' END AS "PTO days"
 FROM fortune_companies;
 
--- 7. Rank companies from highest to lowest revenue, including only those that offer healthcare benefits
+-- 7. Rank companies that offer healthcare benefits by revenue, from highest to lowest
 SELECT company_name, revenue, healthcare_benefits
 FROM fortune_companies
 WHERE healthcare_benefits=1
 ORDER BY revenue DESC;
+
+--8.Display the average revenue of companies by industry, including only those industries where the average employee tenure is at least 4 years.
+SELECT industry, ROUND(AVG(revenue),1) AS avg_revenue
+FROM fortune_companies
+GROUP BY industry
+HAVING avg_employee_tenure>=4;
+
+--9.List companies that provide healthcare benefits and at least 8 weeks of maternity leave
+SELECT company_name 
+FROM fortune_companies
+WHERE healthcare_benefits=1
+AND maternity_leave_weeks>=8;
+
+--10. Calculate the average number of paid time off (PTO) days provided by companies in the Energy industry.
+SELECT AVG(paid_time_off_days) AS avg_pto
+FROM fortune_companies
+WHERE industry='Energy';
