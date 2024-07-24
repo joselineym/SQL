@@ -1,4 +1,4 @@
-# This project explores TV and movie content available on Netflix.
+# This project analyzes TV and movie content available on Netflix.
 
 # The project is written using the PostgreSQL dialect and uses data from the following two Netflix datasets:
 
