@@ -1,10 +1,4 @@
-SELECT *
-FROM BIT_DB.customers 
-WHERE length(order_id)=6
-AND order_id <> 'Order ID';
-
-SELECT *
-FROM BIT_DB.JanSales;
+#This SQL project involes querying a database containing multiple tables to gather and analyze statistics on customer and order data.
 
 --1.How many orders were placed in January?
 SELECT COUNT(orderID) 
@@ -34,9 +28,6 @@ WHERE length(orderID)=6
 AND orderID <> 'Order ID';
 
 --4.Which product was the cheapest one sold in January, and what was the price?
-SELECT *
-FROM BIT_DB.JanSales;
-
 SELECT distinct product, price
 FROM BIT_DB.JanSales
 ORDER BY price ASC LIMIT 1;
@@ -47,9 +38,6 @@ FROM BIT_DB.JanSales
 GROUP BY product;
 
 --6.Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
-SELECT *
-FROM BIT_DB.FebSales;
-
 SELECT Product, sum(Quantity), SUM(Quantity)*price as revenue
 FROM BIT_DB.FebSales
 WHERE location='548 Lincoln St, Seattle, WA 98101'
