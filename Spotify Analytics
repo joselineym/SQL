@@ -34,7 +34,7 @@ FROM BIT_DB.Spotifydata;
 --1. What are the top 5 most popular tracks?
 SELECT artist_name, track_name, popularity
 FROM BIT_DB.Spotifydata
-Order by Popularity desc
+Order by Popularity DESC
 LIMIT 5;
 
 --2. What is the average danceability of the the tracks
@@ -45,18 +45,18 @@ FROM BIT_DB.Spotifydata;
 SELECT track_name, popularity
 FROM BIT_DB.Spotifydata
 WHERE track_name like '%feat%'
-ORDER BY popularity desc;
+ORDER BY popularity DESC;
 
 --4. Which tracks have an energy level greater than 0.8?
 SELECT track_name, energy
 FROM BIT_DB.Spotifydata
 WHERE energy>0.8 
-ORDER By energy asc; 
+ORDER By energy ASC; 
 
 --5. What are the top 5 longest tracks?
 SELECT track_name, duration_ms
 FROM BIT_DB.Spotifydata
-Order by duration_ms desc
+Order by duration_ms DESC
 LIMIT 5;
 
 --6. What is the average tempo of tracks grouped by artist?
