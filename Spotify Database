@@ -1,0 +1,63 @@
+SELECT *
+FROM BIT_DB.Spotifydata;
+
+--1. What are the top 5 most popular tracks?
+SELECT artist_name, track_name, popularity
+FROM BIT_DB.Spotifydata
+Order by Popularity desc
+LIMIT 5;
+
+--2. What is the average danceability of the the tracks
+SELECT Avg(danceability) AS avg_danceability
+FROM BIT_DB.Spotifydata;
+
+--3. List the tracks that have a featured artist and order by most to least popular
+SELECT track_name, popularity
+FROM BIT_DB.Spotifydata
+WHERE track_name like '%feat%'
+ORDER BY popularity desc;
+
+--4. Which tracks have an energy level greater than 0.8?
+SELECT track_name, energy
+FROM BIT_DB.Spotifydata
+WHERE energy>0.8 
+ORDER By energy asc; 
+
+--5. What are the top 5 longest tracks?
+SELECT track_name, duration_ms
+FROM BIT_DB.Spotifydata
+Order by duration_ms desc
+LIMIT 5;
+
+--6. What is the average tempo of tracks grouped by artist?
+SELECT artist_name, AVG(tempo) AS average_tempo
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name;
+
+--7. Which artist has the most songs in the dataset?
+Select artist_name, Count(*) AS number_of_songs
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY number_of_songs DESC
+Limit 1;
+
+--8. Which tracks have both high valence (greater than 0.8) and high energy (greater than 0.8)?
+SELECT track_name
+FROM BIT_DB.Spotifydata
+WHERE valence > 0.8
+AND energy >0.8;
+
+--9. Which tracks have a duration longer than 4 minutes?
+SELECT track_name
+FROM BIT_DB.Spotifydata
+WHERE duration_ms >240000;
+
+--10. How many tracks are in each energy level?
+SELECT COUNT(*) AS track_count,
+CASE 
+WHEN energy > 0.75 THEN 'High Energy'
+WHEN energy > 0.35 THEN 'Medium Energy'
+ELSE 'Low Energy'
+END AS Energy_Level
+FROM BIT_DB.Spotifydata
+GROUP BY Energy_Level;
