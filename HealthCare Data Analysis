@@ -1,0 +1,56 @@
+This project involves analyzing healthcare data to identify trends in patient demographics, billing, and medication usage.
+
+
+
+CREATE TABLE healthcare_data (
+Name TEXT,
+Age INTEGER,
+Gender TEXT,
+Blood_Type TEXT,
+Medical_Condition TEXT,
+Date_of_Admission TEXT,
+Doctor TEXT,
+Hospital TEXT,
+Insurance_Provider TEXT,
+Billing_Amount REAL,
+Room_Number INTEGER,
+Admission_Type TEXT,
+Discharge_Date TEXT,
+Medication TEXT,
+Test_Results TEXT
+);
+
+
+SELECT *
+FROM BIT_DB.healthcare_data
+LIMIT 20;
+
+--#1 What are the average ages of patients for each medical condition, and how does the number of patients vary by condition?
+SELECT medical_condition,ROUND(AVG(Age),1) AS Avg_Age, COUNT(*) AS Patient_Count
+FROM BIT_DB.healthcare_data
+GROUP BY medical_condition
+ORDER BY Avg_Age DESC;
+
+-- #2 What is the total billing amount for each medical condition?
+SELECT medical_condition, ROUND(SUM(Billing_Amount),2) AS Total_Billing
+FROM BIT_DB.healthcare_data
+GROUP BY medical_condition
+ORDER BY Total_Billing DESC;
+
+-- #3 How do billing amounts vary by insurance provider?
+SELECT Insurance_Provider, ROUND(SUM(Billing_Amount),2) AS Total_Billing
+FROM BIT_DB.healthcare_data
+GROUP BY Insurance_Provider
+ORDER BY Total_Billing DESC;
+
+-- #4 What is the average billing amount for different admission types?
+SELECT Admission_Type, ROUND(AVG(Billing_Amount),2) AS Avg_Billing
+FROM BIT_DB.healthcare_data
+GROUP BY Admission_Type
+ORDER BY Avg_Billing DESC;
+
+-- #5 Which medications are prescribed the most frequently?
+SELECT Medication, COUNT(Medication) AS Prescription_Count
+FROM BIT_DB.healthcare_data 
+GROUP BY Medication
+ORDER BY Prescription_Count DESC;
