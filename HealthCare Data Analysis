@@ -54,3 +54,43 @@ SELECT Medication, COUNT(Medication) AS Prescription_Count
 FROM BIT_DB.healthcare_data 
 GROUP BY Medication
 ORDER BY Prescription_Count DESC;
+
+-- #6 Which hospitals have the highest total billing amounts?
+SELECT Hospital, ROUND(SUM(Billing_Amount),2) AS Total_Billing
+FROM BIT_DB.healthcare_data
+GROUP BY Hospital
+ORDER BY Total_Billing DESC;
+
+-- #7 What is the average billing amount for each hospital?
+SELECT Hospital, ROUND(AVG(Billing_Amount),2) AS Avg_Billing
+FROM BIT_DB.healthcare_data
+GROUP BY Hospital
+ORDER BY Avg_Billing DESC;
+
+--#8 Which doctors have treated the highest number of patients?
+SELECT Doctor, COUNT(*) AS Patient_Count
+FROM BIT_DB.healthcare_data
+GROUP BY Doctor
+ORDER BY Patient_Count DESC
+Limit 5;
+ 
+-- #9 Which doctor had the most patients with inconclusive test results?
+SELECT Doctor, COUNT(*) AS Patient_Count
+FROM BIT_DB.healthcare_data
+WHERE Test_Results = 'Inconclusive'
+GROUP BY Doctor 
+ORDER BY Patient_Count DESC
+LIMIT 3;
+
+-- #10 What is the average age of patients admitted for emergency treatment?
+SELECT ROUND(AVG(Age),2) AS Avg_Age, Admission_Type
+FROM BIT_DB.healthcare_data
+WHERE Admission_Type='Emergency';
+
+-- #11 What blood type has the most diabetes conditions?
+SELECT Blood_Type, COUNT(*) AS Patient_Count
+FROM BIT_DB.healthcare_data 
+WHERE Medical_Condition='Diabetes'
+GROUP BY Blood_Type
+Order BY Patient_Count DESC
+Limit 1;
