@@ -1,6 +1,5 @@
 ## This project focuses on analyzing healthcare data to uncover trends in patient demographics, billing, and medication usage.
-
-## I began by obtaining a healthcare dataset from Kaggle and then created a table in my database for further analysis.
+## I obtained the dataset from Kaggle and performed data cleaning in Excel before creating a table in my database for analysis.
 
 
 CREATE TABLE healthcare_data (
