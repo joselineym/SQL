@@ -94,3 +94,34 @@ WHERE Medical_Condition='Diabetes'
 GROUP BY Blood_Type
 Order BY Patient_Count DESC
 Limit 1;
+
+-- #12 How does the average billing amount vary between genders for each medical condition?
+SELECT Gender, Medical_Condition, ROUND(AVG(Billing_Amount), 2) AS Avg_Billing
+FROM BIT_DB.healthcare_data
+GROUP BY Gender, Medical_Condition
+ORDER BY Avg_Billing DESC;
+
+-- #13 What is the most common admission type for patients over 60 years old?
+SELECT Admission_Type, COUNT(*) AS Count_Over_60
+FROM BIT_DB.healthcare_data
+WHERE Age > 60
+GROUP BY Admission_Type
+ORDER BY Count_Over_60 DESC;
+
+-- #14  Which insurance providers cover the highest number of emergency admissions?
+SELECT Insurance_Provider, COUNT(*) AS Emergency_Admission_Count
+FROM BIT_DB.healthcare_data
+WHERE Admission_Type = 'Emergency'
+GROUP BY Insurance_Provider
+ORDER BY Emergency_Admission_Count DESC;
+
+-- #15 How do medication prescriptions vary by patient age group?
+SELECT
+CASE 
+WHEN Age < 18 then 'Under 18'
+WHEN Age BETWEEN 18 AND 40 THEN '18-40'
+WHEN Age BETWEEN 41 AND 65 THEN '41-65'
+ELSE '65+'END AS Age_Group, Medication, COUNT(*) AS Prescription_Count
+FROM BIT_DB.healthcare_data
+GROUP BY Age_Group, Medication
+ORDER BY Prescription_Count DESC;
